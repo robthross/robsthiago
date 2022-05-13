@@ -26,15 +26,14 @@ pipeline {
           sh "cat nginx/nginx.yaml"
           sh 'cd ~'
           sh 'git clone https://github.com/robthross/jenkins.git'
-          sh 'ls -lha'
-          sh 'mkdir jenkins/nginx'
-          sh 'mv nginx/* jenkins/nginx/'
-          sh 'cd jenkins'
           sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
           sh 'git checkout -b main'
           sh 'git pull'
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "robthross"'
+          sh 'mkdir jenkins/nginx'
+          sh 'mv nginx/* jenkins/nginx/'
+          sh 'cd jenkins'
           withCredentials([usernamePassword(credentialsId: 'tokengit', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
             sh 'git status'
             sh 'git add .'
