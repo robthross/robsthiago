@@ -25,6 +25,7 @@ pipeline {
           sh "sed -i 's/1202/$VersaoNginx/g' nginx/nginx.yaml"
           sh "cat nginx/nginx.yaml"
           sh 'cd ~'
+          sh 'git checkout -b dev'
           sh 'git clone https://github.com/robthross/jenkins.git'
           sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
           sh 'git checkout -b main'
