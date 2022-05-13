@@ -29,12 +29,12 @@ pipeline {
           sh 'git checkout -b dev'
           sh 'git clone https://github.com/robthross/jenkins.git'
           sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
-          sh 'git checkout -b main'
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "robthross"'
           sh 'mkdir jenkins/nginx'
           sh 'mv nginx/* jenkins/nginx/'
           sh 'cd jenkins'
+          sh 'git checkout -b main'
           sh 'git pull'
           withCredentials([usernamePassword(credentialsId: 'tokengit', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
             sh 'git status'
