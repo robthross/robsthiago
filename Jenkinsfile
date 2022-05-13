@@ -25,7 +25,8 @@ pipeline {
           sh "sed -i 's/1202/$VersaoNginx/g' nginx/nginx.yaml"
           sh "cat nginx/nginx.yaml"
           sh 'git clone https://github.com/robthross/jenkins.git'
-          sh 'mkdir /jenkins/nginx'
+          sh 'ls -lha'
+          sh 'mkdir jenkins/nginx'
           sh 'mv nginx/* jenkins/nginx/'
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "robthross"'
