@@ -35,7 +35,7 @@ pipeline {
           sh 'mv nginx/* jenkins/nginx/'
           sh 'cd jenkins'
           sh 'git checkout -b main'
-          sh 'git pull'
+          // sh 'git pull'
           withCredentials([usernamePassword(credentialsId: 'tokengit', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
             sh 'git status'
             sh 'git add .'
