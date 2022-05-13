@@ -22,7 +22,7 @@ pipeline {
     stage("Alterar Yaml"){
       steps {
         container("git") {
-          sh "sed -i 's/1.20.2/$VersaoNginx/g' nginx/nginx.yaml"
+          sh "sed -i 's/1202/$VersaoNginx/g' nginx/nginx.yaml"
           sh "cat nginx/nginx.yaml"
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "robthross"'
@@ -32,7 +32,7 @@ pipeline {
             sh 'git status'
             sh 'git add .'
             sh 'git commit -m "commit pipeline"'
-            sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@git@github.com:robthross/jenkins.git')
+            sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com:robthross/jenkins.git')
         }
         }
       }
