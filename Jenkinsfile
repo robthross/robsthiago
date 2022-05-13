@@ -38,7 +38,7 @@ pipeline {
             sh 'git status'
             sh 'git add .'
             sh 'git commit -m "commit pipeline"'
-            sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com:robthross/jenkins.git')
+            sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/jenkins.git')
         }
         }
       }
