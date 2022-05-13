@@ -33,12 +33,12 @@ pipeline {
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "robthross"'
           sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
-          withCredentials([usernamePassword(credentialsId: 'gitlabpass1', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+          withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
             sh 'git checkout -b main'
             sh 'git status'
             sh 'git add .'
             sh 'git commit -m "commit pipeline"'
-            sh('git push http://${GIT_USERNAME}:${GIT_PASSWORD}@github.com:robthross/jenkins.git')
+            sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com:robthross/jenkins.git')
         }
         }
       }
