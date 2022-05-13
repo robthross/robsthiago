@@ -25,9 +25,10 @@ pipeline {
           sh "sed -i 's/1202/$VersaoNginx/g' nginx/nginx.yaml"
           sh "cat nginx/nginx.yaml"
           sh 'git clone https://github.com/robthross/jenkins.git'
+          sh 'mv nginx/* jenkins/nginx/'
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "robthross"'
-          // sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
+          sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
           withCredentials([usernamePassword(credentialsId: 'gitlabpass1', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
             sh 'git checkout -b main'
             sh 'git status'
