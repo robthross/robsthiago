@@ -28,7 +28,7 @@ pipeline {
           sh 'git clone https://github.com/robthross/jenkins.git'
           sh 'ls -lha'
           sh 'mkdir jenkins/nginx'
-          sh 'mv robsthiago/nginx/* jenkins/nginx/'
+          sh 'mv nginx/* jenkins/nginx/'
           sh 'cd jenkins'
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "robthross"'
