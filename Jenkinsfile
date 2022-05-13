@@ -30,6 +30,7 @@ pipeline {
           sh 'mkdir jenkins/nginx'
           sh 'mv nginx/* jenkins/nginx/'
           sh 'cd jenkins'
+          sh 'git pull'
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "robthross"'
           sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
