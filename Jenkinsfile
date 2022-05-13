@@ -28,7 +28,7 @@ pipeline {
           sh 'git clone https://github.com/robthross/jenkins.git'
           sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
           sh 'git checkout -b main'
-          sh 'git pull'
+          // sh 'git pull'
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "robthross"'
           sh 'mkdir jenkins/nginx'
