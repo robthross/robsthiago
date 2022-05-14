@@ -36,7 +36,7 @@ pipeline {
           sh 'cat nginx/nginx.yaml'
           // sh 'mkdir jenkins/nginx'
           // sh 'mv nginx/* jenkins/nginx/'
-          sh 'git checkout -b main'
+          // sh 'git checkout -b main'
           sh 'git pull https://github.com/robthross/jenkins main'
           withCredentials([usernamePassword(credentialsId: 'tokengit', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
             sh 'git status'
