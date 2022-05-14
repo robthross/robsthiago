@@ -33,6 +33,7 @@ pipeline {
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "robthross"'
           sh 'ls -lha'
+          sh 'cat nginx/nginx.yaml'
           // sh 'mkdir jenkins/nginx'
           // sh 'mv nginx/* jenkins/nginx/'
           sh 'cd jenkins'
