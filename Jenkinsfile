@@ -24,25 +24,15 @@ pipeline {
         container("git") {
           sh "sed -i 's/1202/$VersaoNginx/g' nginx/nginx.yaml"
           sh "cat nginx/nginx.yaml"
-          sh 'cd ~'
-          sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
-          sh 'git checkout -b dev'
-          sh 'git clone https://github.com/robthross/jenkins.git'
-          sh 'git fetch --tags --force --progress -- https://github.com/robthross/jenkins +refs/heads/*:refs/remotes/origin/*'
+          sh 'git checkout -b main'
           sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "robthross"'
-          sh 'ls -lha'
-          sh 'cat nginx/nginx.yaml'
-          // sh 'mkdir jenkins/nginx'
-          // sh 'mv nginx/* jenkins/nginx/'
-          // sh 'git checkout -b main'
-          sh 'git pull https://github.com/robthross/jenkins main'
           withCredentials([usernamePassword(credentialsId: 'tokengit', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
             sh 'git status'
             sh 'git add .'
             sh 'git commit -m "commit pipeline"'
-            sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/jenkins.git')
+            sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/robsthiago.git')
         }
         }
       }
