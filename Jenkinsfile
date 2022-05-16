@@ -29,6 +29,7 @@ pipeline {
           sh 'git config --global user.name "robthross"'
           withCredentials([usernamePassword(credentialsId: 'tokengit', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
             sh 'git status'
+            sh 'git switch dev'
             sh 'git pull'
             sh 'git add .'
             sh 'git commit -m "commit pipeline"'
