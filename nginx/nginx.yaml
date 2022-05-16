@@ -9,7 +9,6 @@ spec:
   selector:
     matchLabels:
       app: nginx
-  strategy: {}
   template:
     metadata:
       labels:
@@ -18,5 +17,17 @@ spec:
       containers:
       - image: nginx:1202
         name: nginx
-        resources: {}
-status: {}
+        ports:
+        - containerPort: 80
+  minReadySeconds: 30
+  revisionHistoryLimit: 3
+  strategy:
+    canary: #Indicates that the rollout should use the Canary strategy
+      maxSurge: "25%"
+      maxUnavailable: 0
+      steps:
+      - setWeight: 10
+      - pause:
+          duration: 1h # 1 hour
+      - setWeight: 20
+      - pause: {} # pause indefinitely
