@@ -22,7 +22,7 @@ pipeline {
     stage("Alterar Yaml"){
       steps {
         container("git") {
-          sh "sed -i 's/1202/$VersaoNginx/g' nginx/nginx.yaml"
+          sh "sed -i 's/1.20.2/$VersaoNginx/g' nginx/nginx.yaml"
           sh "cat nginx/nginx.yaml"
           sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
