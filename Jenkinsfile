@@ -11,7 +11,7 @@ pipeline {
         kind: Pod
         spec:
           containers:
-          - name: Docker
+          - name: docker
             image: rancher/dind
             command:
             - cat
@@ -22,28 +22,36 @@ pipeline {
     stages { 
         stage('Clonando o Git') { 
             steps { 
-                git 'https://github.com/robthross/robsthiago.git' 
+              containers('docker'){
+                git 'https://github.com/robthross/robsthiago.git'
+              }
             }
         } 
         stage('Building da imagem') { 
             steps { 
+              containers('docker'){
                 script { 
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                  }
                 }
             } 
         }
         stage('Push da image') { 
-            steps { 
+            steps {
+              containers('docker'){
                 script { 
                     docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
+                        dockerImage.push()
+                      }
                     }
                 } 
             }
         } 
         stage('Limpando imagem') { 
-            steps { 
+            steps {
+              containers('docker'){ 
                 sh "docker rmi $registry:$BUILD_NUMBER" 
+              }
             }
         } 
     }
