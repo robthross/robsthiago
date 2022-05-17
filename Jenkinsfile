@@ -1,11 +1,24 @@
-pipeline { 
-2
+pipeline {
     environment { 
         registry = "rtprosa315/jenkins" 
         registryCredential = 'docker-build' 
         dockerImage = '' 
     }
-    agent any 
+    agent {
+      kubernetes {
+        yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          containers:
+          - name: Docker
+            image: rancher/dind
+            command:
+            - cat
+            tty: true
+        '''
+      }
+    }
     stages { 
         stage('Clonando o Git') { 
             steps { 
