@@ -33,7 +33,7 @@ pipeline {
             // sh 'git pull'
             sh 'git add .'
             sh 'git commit -m "commit pipeline"'
-            // sh 'git checkout main'
+            sh 'git checkout main'
             // sh 'git merge dev'
             sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/robsthiago.git')
         }
