@@ -29,8 +29,9 @@ pipeline {
           sh 'git config --global user.name "robthross"'
           withCredentials([usernamePassword(credentialsId: 'tokengit', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
             sh 'git tag -a NewVersion -m "Push Test"'
-            sh 'git merge origin/dev'
-            sh 'git commit -am "commit pipeline"'
+            // sh 'git merge origin/dev'
+            sh 'git add .'
+            sh 'git commit -a -m "commit pipeline"'
             sh 'git push origin main'
             sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/robsthiago.git --all')
         }
