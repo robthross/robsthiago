@@ -1,5 +1,5 @@
 
-def VersaoNginx = "1.20.2"
+def VersaoNginx = "1.18"
 def tagName = 'minha Tag'
 pipeline {
   agent {
