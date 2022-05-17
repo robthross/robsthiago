@@ -32,7 +32,7 @@ pipeline {
             // sh 'git merge origin/dev'
             sh 'git add .'
             sh 'git commit -a -m "commit pipeline"'
-            sh 'git push origin main'
+            // sh 'git push origin main'
             sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/robsthiago.git --all')
         }
         }
