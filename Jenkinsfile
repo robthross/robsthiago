@@ -1,6 +1,6 @@
 
-def VersaoNginx = "1.14"
-def tagName = "http://gitlab.casa.com/root/argocd.git"
+def VersaoNginx = "1.20.2"
+def tagName = 'minha Tag'
 pipeline {
   agent {
     kubernetes {
@@ -28,7 +28,7 @@ pipeline {
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "robthross"'
           withCredentials([usernamePassword(credentialsId: 'tokengit', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-            sh 'git tag -a $tagName -m "Push Test"'
+            sh 'git tag -a ${tagName} -m "Push Test"'
             sh 'git merge dev'
             sh 'git commit -am "commit pipeline"'
             sh 'git push origin main'
