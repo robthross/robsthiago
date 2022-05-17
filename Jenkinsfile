@@ -28,12 +28,12 @@ pipeline {
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "robthross"'
           withCredentials([usernamePassword(credentialsId: 'tokengit', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+            sh 'git checkout main'
             sh 'git status'
             // sh 'git switch dev'
             // sh 'git pull'
             sh 'git add .'
             sh 'git commit -m "commit pipeline"'
-            sh 'git checkout main'
             // sh 'git merge dev'
             sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/robsthiago.git')
         }
