@@ -22,7 +22,7 @@ spec:
   minReadySeconds: 30
   revisionHistoryLimit: 3
   strategy:
-    Type: Canary: #Indicates that the rollout should use the Canary strategy
+    Type: "Canary" #Indicates that the rollout should use the Canary strategy
       maxSurge: "25%"
       maxUnavailable: 0
       steps:
