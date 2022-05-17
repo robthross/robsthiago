@@ -1,5 +1,5 @@
 
-def VersaoNginx = "1.20.2"
+def VersaoNginx = "1.14"
 def RepoUrl = "http://gitlab.casa.com/root/argocd.git"
 pipeline {
   agent {
