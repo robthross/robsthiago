@@ -22,14 +22,14 @@ pipeline {
             - 99d
             volumeMounts:
             - name: docker-socket
-              mountPath: /var/run
+              mountPath: /var/run/docker.sock
           - name: docker-daemon
             image: docker:20.10.16-dind-alpine3.15
             securityContext:
               privileged: true
             volumeMounts:
             - name: docker-socket
-              mountPath: /var/run
+              mountPath: /var/run/docker.sock
             command:
             - cat
             tty: true
