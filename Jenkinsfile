@@ -29,7 +29,7 @@ pipeline {
         // } 
         stage('Building da imagem') { 
             steps { 
-              containers('docker'){
+              container('docker'){
                 script { 
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                   }
