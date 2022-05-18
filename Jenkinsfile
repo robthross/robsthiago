@@ -31,7 +31,7 @@ pipeline {
             steps { 
                 script { 
                   container('docker'){
-                    sh 'ls -lha /etc/init.d/'
+                    sh 'docker status'
                     dockerImage = docker.build("$registry:$BUILD_NUMBER")
                   }
                 }
