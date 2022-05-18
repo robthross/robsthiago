@@ -44,8 +44,6 @@ pipeline {
             steps { 
                 script { 
                   container('docker'){
-                    sh 'docker status'
-                    sh 'service docker start'
                     dockerImage = docker.build("$registry:$BUILD_NUMBER")
                   }
                 }
