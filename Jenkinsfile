@@ -16,6 +16,9 @@ pipeline {
           containers:
           - name: docker
             image: docker:20.10.16-alpine3.15
+            env:
+            - name: DOCKER_HOST
+              value: unix:///var/run/docker.sock
             command:
             - sleep
             args:
