@@ -32,7 +32,7 @@ pipeline {
                 script { 
                   container('docker'){
                     sh 'echo "$registry" + "$BUILD_NUMBER"'
-                    dockerImage = docker.build("$registry" + ":$BUILD_NUMBER")
+                    dockerImage = docker.build("$registry:$BUILD_NUMBER")
                   }
                 }
             } 
@@ -41,7 +41,7 @@ pipeline {
             steps {
               container('docker'){
                 script { 
-                    docker.withRegistry( 'https://hub.docker.com', registryCredential ) { 
+                    docker.withRegistry( 'https://hub.docker.com', "$registryCredential" ) { 
                         dockerImage.push()
                       }
                     }
