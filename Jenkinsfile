@@ -30,8 +30,10 @@ pipeline {
         stage('Building da imagem') { 
             steps { 
                 script { 
-                    sh 'echo "$BUILD_NUMBER"'
+                  container('docker'){
+                    sh 'echo "$registry" + "$BUILD_NUMBER"'
                     dockerImage = docker.build("$registry" + ":$BUILD_NUMBER")
+                  }
                 }
             } 
         }
