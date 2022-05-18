@@ -2,7 +2,7 @@ pipeline {
     environment { 
         registry = "rtprosa315/jenkins" 
         registryCredential = 'docker-build' 
-        dockerImage = 'rancher/dind-alpine' 
+        // dockerImage = 'rancher/dind-alpine' 
     }
     agent {
       kubernetes {
