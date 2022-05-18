@@ -2,7 +2,7 @@ pipeline {
     environment { 
         registry = "rtprosa315/jenkins" 
         registryCredential = 'docker-build' 
-        dockerImage = 'rancher/dind' 
+        dockerImage = 'rancher/dind-alpine' 
     }
     agent {
       kubernetes {
@@ -12,7 +12,7 @@ pipeline {
         spec:
           containers:
           - name: docker
-            image: rancher/dind
+            image: rancher/dind-alpine
             command:
             - cat
             tty: true
