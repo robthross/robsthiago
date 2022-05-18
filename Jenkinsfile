@@ -31,7 +31,7 @@ pipeline {
             steps { 
                 script { 
                   container('docker'){
-                    sh 'rc-service docker start'
+                    sh '/etc/init.d/docker start'
                     dockerImage = docker.build("$registry:$BUILD_NUMBER")
                   }
                 }
