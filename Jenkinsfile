@@ -12,7 +12,7 @@ pipeline {
         spec:
           containers:
           - name: docker
-            image: rancher/dind-alpine
+            image: docker:20.10.16-alpine3.15
             command:
             - cat
             tty: true

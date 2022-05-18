@@ -4,6 +4,6 @@ WORKDIR /opt/python
 
 COPY . /opt/python
 
-RUN chmod 755 app.py
+RUN chmod 755 api.py
 
 CMD ["python3", "api.py"]
