@@ -20,13 +20,13 @@ pipeline {
       }
     }
     stages { 
-        stage('Clonando o Git') { 
-            steps { 
-              containers('docker'){
-                git 'https://github.com/robthross/robsthiago.git'
-              }
-            }
-        } 
+        // stage('Clonando o Git') { 
+        //     steps { 
+        //       containers('docker'){
+        //         git 'https://github.com/robthross/robsthiago.git'
+        //       }
+        //     }
+        // } 
         stage('Building da imagem') { 
             steps { 
               containers('docker'){
