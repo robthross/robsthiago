@@ -10,9 +10,22 @@ pipeline {
         apiVersion: v1
         kind: Pod
         spec:
+          volumes:
+            - name: docker-socket
+              emptyDir: {}
           containers:
           - name: docker
             image: docker:20.10.16-alpine3.15
+            volumeMounts:
+            - name: docker-socket
+              mountPath: /var/run
+            - name: docker-daemon
+              image: docker:20.10.16--dind-alpine3.15
+              securityContext:
+                privileged: true
+            volumeMounts:
+              - name: docker-socket
+                mountPath: /var/run
             command:
             - cat
             tty: true
