@@ -20,7 +20,7 @@ pipeline {
             - name: docker-socket
               mountPath: /var/run
           - name: docker-daemon
-            image: docker:20.10.16--dind-alpine3.15
+            image: docker:20.10.16-dind-alpine3.15
             securityContext:
               privileged: true
             volumeMounts:
