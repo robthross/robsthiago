@@ -31,7 +31,7 @@ pipeline {
             steps { 
                 script { 
                   container('docker'){
-                    sh 'echo "$registry" + "$BUILD_NUMBER"'
+                    sh 'ls -lha'
                     dockerImage = docker.build("$registry:$BUILD_NUMBER")
                   }
                 }
