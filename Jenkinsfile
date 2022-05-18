@@ -38,7 +38,7 @@ pipeline {
         }
         stage('Push da image') { 
             steps {
-              containers('docker'){
+              container('docker'){
                 script { 
                     docker.withRegistry( '', registryCredential ) { 
                         dockerImage.push()
@@ -49,7 +49,7 @@ pipeline {
         } 
         stage('Limpando imagem') { 
             steps {
-              containers('docker'){ 
+              container('docker'){ 
                 sh "docker rmi $registry:$BUILD_NUMBER" 
               }
             }
