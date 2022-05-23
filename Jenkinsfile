@@ -18,8 +18,8 @@ spec:
     volumeMounts:
       - name: varlibcontainers
         mountPath: /var/lib/containers
-  volumes:
-    - name: varlibcontainers
+    volumes:
+      - name: varlibcontainers
   containers:
   - name: git
     image: bitnami/git:2.36.1-debian-10-r15
@@ -67,20 +67,20 @@ spec:
         }
       }
     }
-    // stage('Git Push') {
-    //   steps {
-    //     container('git') {
-    //       sh 'git clone https://github.com/robthross/jenkins.git'
-    //       sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g /nginx/nginx.yaml'
-    //       sh 'cd jenkins'
-    //       sh 'git add .'
-    //       sh 'git commit -m "Commit Pipeline"'
-    //       withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-    //         sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/jenkins.git')
-    //       }
-    //     }
-    //   }
-    // }
+    stage('Git Push') {
+      steps {
+        container('git') {
+          sh 'git clone https://github.com/robthross/jenkins.git'
+          sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g /nginx/nginx.yaml'
+          sh 'cd jenkins'
+          sh 'git add .'
+          sh 'git commit -m "Commit Pipeline"'
+          withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+            sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/jenkins.git')
+          }
+        }
+      }
+    }
   }
   post {
     always {
