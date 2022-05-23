@@ -8,14 +8,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: python
   template:
     metadata:
       labels:
-        app: nginx
+        app: python
     spec:
       containers:
-      - image: nginx:1.20.2
-        name: nginx
+      - image: rtprosa315/jenkins:xxx
+        name: python
         ports:
         - containerPort: 80

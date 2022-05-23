@@ -20,6 +20,12 @@ spec:
         mountPath: /var/lib/containers
   volumes:
     - name: varlibcontainers
+  containers:
+  - name: git
+    image: bitnami/git:2.36.1-debian-10-r15
+    command:
+    - cat
+    tty: true
 '''   
     }
   }
@@ -58,6 +64,17 @@ spec:
         container('buildah') {
           sh 'buildah push rtprosa315/jenkins:$BUILD_NUMBER'
           sh 'buildah push rtprosa315/jenkins:latest'
+        }
+      }
+    }
+    stage('Git Push') {
+      steps {
+        container('git') {
+          sh 'git clone https://github.com/robthross/jenkins.git'
+          sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g /nginx/nginx.yaml'
+          sh 'cd jenkins'
+          sh 'git add . && git commit -m "Commit Pipeline" && git push origin main'
+
         }
       }
     }
