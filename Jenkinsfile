@@ -18,8 +18,8 @@ spec:
     volumeMounts:
       - name: varlibcontainers
         mountPath: /var/lib/containers
-    volumes:
-      - name: varlibcontainers
+  volumes:
+    - name: varlibcontainers
   '''   
     }
   }
