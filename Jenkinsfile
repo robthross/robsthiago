@@ -8,6 +8,11 @@ metadata:
   name: buildah
 spec:
   containers:
+  - name: git
+    image: bitnami/git:2.36.1-debian-10-r15
+    command:
+    - cat
+    tty: true
   - name: buildah
     image: quay.io/buildah/stable:v1.23.1
     command:
@@ -20,6 +25,7 @@ spec:
         mountPath: /var/lib/containers
   volumes:
     - name: varlibcontainers
+
   '''   
     }
   }
@@ -63,7 +69,7 @@ spec:
     }
     stage('Git Push') {
       steps {
-        container('buildah') {
+        container('git') {
           sh 'git clone https://github.com/robthross/jenkins.git'
           sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g /nginx/nginx.yaml'
           sh 'cd jenkins'
