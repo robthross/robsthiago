@@ -2,27 +2,28 @@ pipeline {
   agent {
     kubernetes {
       yaml '''
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: git
-    image: bitnami/git
-    - cat
-    tty: true
-  - name: buildah
-    image: quay.io/buildah/stable:v1.23.1
-    command:
-    - cat
-    tty: true
-    securityContext:
-      privileged: true
-    volumeMounts:
-      - name: varlibcontainers
-        mountPath: /var/lib/containers
-  volumes:
-    - name: varlibcontainers
-  '''   
+        apiVersion: v1
+        kind: Pod
+        spec:
+          containers:
+          - name: git
+            image: bitnami/git
+            - cat
+            tty: true
+          containers:
+          - name: buildah
+            image: quay.io/buildah/stable:v1.23.1
+            command:
+            - cat
+            tty: true
+            securityContext:
+              privileged: true
+            volumeMounts:
+              - name: varlibcontainers
+                mountPath: /var/lib/containers
+          volumes:
+            - name: varlibcontainers
+        '''   
     }
   }
   options {
