@@ -20,6 +20,8 @@ pipeline {
             - name: varlibcontainers
         ''' 
     }
+  }
+  agent {
     kubernetes {
       yaml '''
         apiVersion: v1
