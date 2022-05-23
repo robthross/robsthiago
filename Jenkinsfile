@@ -1,78 +1,72 @@
 pipeline {
-    environment { 
-        registry = "rtprosa315/jenkins" 
-        registryCredential = 'docker-build' 
-        // dockerImage = 'rancher/dind-alpine' 
+  agent {
+    kubernetes {
+      yaml '''
+apiVersion: v1
+kind: Pod
+metadata:
+  name: buildah
+spec:
+  containers:
+  - name: buildah
+    image: quay.io/buildah/stable:v1.23.1
+    command:
+    - cat
+    tty: true
+    securityContext:
+      privileged: true
+    volumeMounts:
+      - name: varlibcontainers
+        mountPath: /var/lib/containers
+  volumes:
+    - name: varlibcontainers
+'''   
     }
-    agent {
-      kubernetes {
-        yaml '''
-        apiVersion: v1
-        kind: Pod
-        spec:
-          volumes:
-            - name: docker-socket
-              emptyDir: {}
-          containers:
-          - name: docker
-            image: docker:20.10.16-alpine3.15
-            env:
-            - name: DOCKER_HOST
-              value: unix:///var/run/docker.sock
-            command:
-            - sleep
-            args:
-            - 99d
-            volumeMounts:
-            - name: docker-socket
-              mountPath: /var/run/docker.sock
-          - name: docker-daemon
-            image: docker:20.10.16-dind-alpine3.15
-            securityContext:
-              privileged: true
-            volumeMounts:
-            - name: docker-socket
-              mountPath: /var/run/docker.sock
-            command:
-            - cat
-            tty: true
-        '''
+  }
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '10'))
+    durabilityHint('PERFORMANCE_OPTIMIZED')
+    disableConcurrentBuilds()
+  }
+  environment {
+    DH_CREDS=credentials('dh-creds')
+  }
+  stages {
+    stage('Build with Buildah') {
+      steps {
+        container('buildah') {
+          sh 'buildah build -t rtprosa315/jenkins:8.5-230 .'
+        }
       }
     }
-    stages { 
-        // stage('Clonando o Git') { 
-        //     steps { 
-        //       containers('docker'){
-        //         git 'https://github.com/robthross/robsthiago.git'
-        //       }
-        //     }
-        // } 
-        stage('Building da imagem') { 
-            steps { 
-                script { 
-                  container('docker'){
-                    dockerImage = docker.build("$registry:$BUILD_NUMBER")
-                  }
-                }
-            } 
+    stage('Login to Docker Hub') {
+      steps {
+        container('buildah') {
+          sh 'echo $DH_CREDS_PSW | buildah login -u $DH_CREDS_USR --password-stdin docker.io'
         }
-        stage('Push da image') { 
-            steps {
-              container('docker'){
-                script { 
-                    docker.withRegistry( 'https://hub.docker.com', "$registryCredential" ) { 
-                        dockerImage.push()
-                      }
-                    }
-                } 
-            }
-        } 
-        stage('Limpando imagem') { 
-            steps {
-              container('docker'){ 
-                sh "docker rmi $registry:$BUILD_NUMBER" 
-              }
-            }
-        } 
+      }
     }
+    stage('tag image') {
+      steps {
+        container('buildah') {
+          sh 'buildah tag rtprosa315/jenkins:8.5-230 rtprosa315/jenkins:latest'
+        }
+      }
+    }
+    stage('push image') {
+      steps {
+        container('buildah') {
+          sh 'buildah push rtprosa315/jenkins:8.5-230'
+          sh 'buildah push rtprosa315/jenkins:latest'
+        }
+      }
+    }
+  }
+  post {
+    always {
+      container('buildah') {
+        sh 'buildah logout docker.io'
+      }
+    }
+  }
 }

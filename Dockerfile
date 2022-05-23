@@ -1,4 +1,4 @@
-FROM python:3.9.7-alpine3.14
+FROM docker.io/python:3.9.7-alpine3.14
 
 WORKDIR /opt/python
 
