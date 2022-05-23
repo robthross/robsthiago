@@ -20,12 +20,12 @@ spec:
         mountPath: /var/lib/containers
     volumes:
       - name: varlibcontainers
-  containers:
-  - name: git
-    image: bitnami/git:2.36.1-debian-10-r15
-    command:
-    - cat
-    tty: true
+//   containers:
+//   - name: git
+//     image: bitnami/git:2.36.1-debian-10-r15
+//     command:
+//     - cat
+//     tty: true
 '''   
     }
   }
@@ -69,7 +69,7 @@ spec:
     }
     stage('Git Push') {
       steps {
-        container('git') {
+        container('buildah') {
           sh 'git clone https://github.com/robthross/jenkins.git'
           sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g /nginx/nginx.yaml'
           sh 'cd jenkins'
