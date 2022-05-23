@@ -73,8 +73,10 @@ spec:
           sh 'git clone https://github.com/robthross/jenkins.git'
           sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g /nginx/nginx.yaml'
           sh 'cd jenkins'
-          sh 'git add . && git commit -m "Commit Pipeline" && git push origin main'
-
+          sh 'git add . && git commit -m "Commit Pipeline"'
+          withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/jenkins.git')
+                    }
         }
       }
     }
