@@ -75,8 +75,8 @@ spec:
           sh 'cd jenkins'
           sh 'git add . && git commit -m "Commit Pipeline"'
           withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                        sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/jenkins.git')
-                    }
+            sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/jenkins.git')
+          }
         }
       }
     }
