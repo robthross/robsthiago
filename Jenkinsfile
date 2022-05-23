@@ -4,16 +4,12 @@ pipeline {
       yaml '''
 apiVersion: v1
 kind: Pod
-// metadata:
-//   name: buildah
 spec:
   containers:
   - name: git
-    image: bitnami/git:2.36.1-debian-10-r15
-    command:
+    image: bitnami/git
     - cat
     tty: true
-  containers:
   - name: buildah
     image: quay.io/buildah/stable:v1.23.1
     command:
@@ -26,7 +22,6 @@ spec:
         mountPath: /var/lib/containers
   volumes:
     - name: varlibcontainers
-
   '''   
     }
   }
