@@ -35,7 +35,7 @@ spec:
     stage('Build with Buildah') {
       steps {
         container('buildah') {
-          sh 'buildah build -t rtprosa315/jenkins:8.5-230 .'
+          sh 'buildah build -t rtprosa315/jenkins:$BUILD_NUMBER .'
         }
       }
     }
@@ -49,14 +49,14 @@ spec:
     stage('tag image') {
       steps {
         container('buildah') {
-          sh 'buildah tag rtprosa315/jenkins:8.5-230 rtprosa315/jenkins:latest'
+          sh 'buildah tag rtprosa315/jenkins:$BUILD_NUMBER rtprosa315/jenkins:latest'
         }
       }
     }
     stage('push image') {
       steps {
         container('buildah') {
-          sh 'buildah push rtprosa315/jenkins:8.5-230'
+          sh 'buildah push rtprosa315/jenkins:$BUILD_NUMBER'
           sh 'buildah push rtprosa315/jenkins:latest'
         }
       }
