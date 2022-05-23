@@ -20,13 +20,7 @@ spec:
         mountPath: /var/lib/containers
     volumes:
       - name: varlibcontainers
-//   containers:
-//   - name: git
-//     image: bitnami/git:2.36.1-debian-10-r15
-//     command:
-//     - cat
-//     tty: true
-'''   
+  '''   
     }
   }
   options {
