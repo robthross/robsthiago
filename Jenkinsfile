@@ -13,6 +13,7 @@ spec:
     command:
     - cat
     tty: true
+  containers:
   - name: buildah
     image: quay.io/buildah/stable:v1.23.1
     command:
