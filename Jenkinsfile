@@ -2,14 +2,6 @@ pipeline {
   agent {
     kubernetes {
       yaml '''
-        apiVersion: v1
-        kind: Pod
-        spec:
-          containers:
-          - name: git
-            image: bitnami/git
-            - cat
-            tty: true
           containers:
           - name: buildah
             image: quay.io/buildah/stable:v1.23.1
@@ -23,8 +15,19 @@ pipeline {
                 mountPath: /var/lib/containers
           volumes:
             - name: varlibcontainers
-        '''   
+        ''' 
     }
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          containers:
+          - name: git
+            image: bitnami/git
+            - cat
+            tty: true
+        '''
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
