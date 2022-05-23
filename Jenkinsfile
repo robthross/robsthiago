@@ -4,8 +4,8 @@ pipeline {
       yaml '''
 apiVersion: v1
 kind: Pod
-metadata:
-  name: buildah
+// metadata:
+//   name: buildah
 spec:
   containers:
   - name: git
