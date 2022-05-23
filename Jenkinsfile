@@ -2,6 +2,9 @@ pipeline {
   agent {
     kubernetes {
       yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec
           containers:
           - name: buildah
             image: quay.io/buildah/stable:v1.23.1
@@ -28,6 +31,7 @@ pipeline {
             - cat
             tty: true
         '''
+    }
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '10'))
