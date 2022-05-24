@@ -21,6 +21,7 @@ pipeline {
                 mountPath: /var/lib/containers
           volumes:
             - name: varlibcontainers
+          containers:
           - name: git
             image: bitnami/git
             command:
