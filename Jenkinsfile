@@ -75,6 +75,8 @@ pipeline {
           sh 'cp -R nginx/nginx.yaml jenkins'
           sh 'cd jenkins'
           sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
+          sh 'git config --global user.email "rtech.thiago@gmail.com"'
+          sh 'git config --global user.name "Robson Thiago"'
           sh 'git add .'
           sh 'git commit -m "Commit Pipeline"'
           withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
