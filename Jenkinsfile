@@ -6,6 +6,12 @@ pipeline {
         kind: Pod
         spec:
           containers:
+          - name: git
+            image: bitnami/git
+            command:
+            - sleep
+            args:
+            - 99d
           - name: buildah
             image: quay.io/buildah/stable:v1.23.1
             command:
@@ -16,14 +22,9 @@ pipeline {
             volumeMounts:
               - name: varlibcontainers
                 mountPath: /var/lib/containers
-            volumes:
-              - name: varlibcontainers
-          - name: git
-            image: bitnami/git
-            command:
-            - sleep
-            args:
-            - 99d
+          volumes:
+            - name: varlibcontainers
+
         ''' 
     }
   }
