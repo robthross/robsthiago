@@ -74,6 +74,7 @@ pipeline {
           sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g nginx/nginx.yaml'
           sh 'cp -R nginx/nginx.yaml jenkins'
           sh 'cd jenkins'
+          sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
           sh 'git add .'
           sh 'git commit -m "Commit Pipeline"'
           withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
