@@ -82,11 +82,11 @@ pipeline {
       }
     }
   }
-  post {
-    always {
-      container('buildah') {
-        sh 'buildah logout docker.io'
-      }
-    }
-  }
+  // post {
+  //   always {
+  //     container('buildah') {
+  //       sh 'buildah logout docker.io'
+  //     }
+  //   }
+  // }
 }
