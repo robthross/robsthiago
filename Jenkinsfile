@@ -66,13 +66,6 @@ pipeline {
       }
     }
   }
-  post {
-    always {
-      container('buildah') {
-        sh 'buildah logout docker.io'
-      }
-    }
-  }
     stage('Git Push') {
       steps {
         container('git') {
@@ -84,6 +77,13 @@ pipeline {
           withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
             sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/jenkins.git')
         }
+      }
+    }
+  }
+  post {
+    always {
+      container('buildah') {
+        sh 'buildah logout docker.io'
       }
     }
   }
