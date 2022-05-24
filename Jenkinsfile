@@ -63,6 +63,7 @@ pipeline {
         container('buildah') {
           sh 'buildah push rtprosa315/jenkins:$BUILD_NUMBER'
           sh 'buildah push rtprosa315/jenkins:latest'
+          sh 'ls -lha'
         }
       }
     }
@@ -70,7 +71,8 @@ pipeline {
       steps {
         container('git') {
           sh 'git clone https://github.com/robthross/jenkins.git'
-          sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g /nginx/nginx.yaml'
+          sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g nginx/nginx.yaml'
+          sh 'cp -R nginx/nginx.yaml jenkins'
           sh 'cd jenkins'
           sh 'git add .'
           sh 'git commit -m "Commit Pipeline"'
