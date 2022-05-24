@@ -65,7 +65,6 @@ pipeline {
         }
       }
     }
-  }
     stage('Git Push') {
       steps {
         container('git') {
