@@ -21,9 +21,6 @@ pipeline {
           containers:
           - name: git
             image: bitnami/git
-            command:
-            - cat
-            tty: true
         ''' 
     }
   }
