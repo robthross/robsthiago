@@ -16,11 +16,14 @@ pipeline {
             volumeMounts:
               - name: varlibcontainers
                 mountPath: /var/lib/containers
-          volumes:
-            - name: varlibcontainers
-          containers:
+            volumes:
+              - name: varlibcontainers
           - name: git
             image: bitnami/git
+            command:
+            - sleep
+            args:
+            - 99d
         ''' 
     }
   }
