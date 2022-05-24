@@ -83,6 +83,7 @@ pipeline {
     always {
       container('buildah') {
         sh 'buildah logout docker.io'
+        }
       }
     }
   }
