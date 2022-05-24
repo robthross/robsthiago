@@ -19,8 +19,8 @@ pipeline {
           volumes:
             - name: varlibcontainers
           containers:
-          - name: buildah
-            image: quay.io/buildah/stable:v1.23.1
+          - name: git
+            image: bitnami/git
             command:
             - cat
             tty: true
