@@ -4,6 +4,9 @@ pipeline {
       yaml '''
         apiVersion: v1
         kind: Pod
+        metadata:
+          name: buildah
+          name: git
         spec
           containers:
           - name: buildah
@@ -18,21 +21,13 @@ pipeline {
                 mountPath: /var/lib/containers
           volumes:
             - name: varlibcontainers
-        ''' 
-    }
-  }
-  agent {
-    kubernetes {
-      yaml '''
-        apiVersion: v1
-        kind: Pod
-        spec:
           containers:
-          - name: git
-            image: bitnami/git
+          - name: buildah
+            image: quay.io/buildah/stable:v1.23.1
+            command:
             - cat
             tty: true
-        '''
+        ''' 
     }
   }
   options {
