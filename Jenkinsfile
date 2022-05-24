@@ -75,6 +75,7 @@ pipeline {
           sh 'git commit -m "Commit Pipeline"'
           withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
             sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/jenkins.git')
+          }
         }
       }
     }
@@ -83,7 +84,6 @@ pipeline {
     always {
       container('buildah') {
         sh 'buildah logout docker.io'
-        }
       }
     }
   }
