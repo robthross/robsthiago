@@ -4,9 +4,6 @@ pipeline {
       yaml '''
         apiVersion: v1
         kind: Pod
-        metadata:
-          name: buildah
-          name: git
         spec:
           containers:
           - name: buildah
@@ -22,8 +19,8 @@ pipeline {
           volumes:
             - name: varlibcontainers
           containers:
-          - name: git
-            image: bitnami/git
+          - name: buildah
+            image: quay.io/buildah/stable:v1.23.1
             command:
             - cat
             tty: true
@@ -68,6 +65,14 @@ pipeline {
         }
       }
     }
+  }
+  post {
+    always {
+      container('buildah') {
+        sh 'buildah logout docker.io'
+      }
+    }
+  }
     stage('Git Push') {
       steps {
         container('git') {
@@ -78,16 +83,8 @@ pipeline {
           sh 'git commit -m "Commit Pipeline"'
           withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
             sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/jenkins.git')
-          }
         }
       }
     }
   }
-  // post {
-  //   always {
-  //     container('buildah') {
-  //       sh 'buildah logout docker.io'
-  //     }
-  //   }
-  // }
 }
