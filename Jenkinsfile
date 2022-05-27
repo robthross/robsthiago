@@ -82,7 +82,7 @@ pipeline {
           // withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
           //   sh('git tag -a "$BUILD_NUMBER" -m "Jenkins"')
           //   sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/robsthiago.git --tags')
-          }
+          // }
         }
       }
     }
