@@ -77,7 +77,7 @@ pipeline {
           sh 'git add .'
           sh 'git commit -m "Commit Pipeline"'
           sh 'git checkout main'
-          sh 'git merge origin/dev'
+          sh 'git merge origin/dev --force'
           // withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
           //   sh('git tag -a "$BUILD_NUMBER" -m "Jenkins"')
           //   sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/robsthiago.git --tags')
