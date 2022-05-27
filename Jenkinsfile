@@ -70,7 +70,6 @@ pipeline {
     stage('Git Push') {
       steps {
         container('git') {
-          // sh 'git clone https://github.com/robthross/jenkins.git'
           sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g nginx/nginx.yaml'
           sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
@@ -79,7 +78,7 @@ pipeline {
           sh 'git add .'
           sh 'git commit -m "Commit Pipeline"'
           withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-            sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/jenkins.git')
+            sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/robsthiago.git')
           }
         }
       }
