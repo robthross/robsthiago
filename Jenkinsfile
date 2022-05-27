@@ -72,8 +72,6 @@ pipeline {
         container('git') {
           // sh 'git clone https://github.com/robthross/jenkins.git'
           sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g nginx/nginx.yaml'
-          sh 'cp -R nginx/nginx.yaml jenkins'
-          sh 'cd jenkins'
           sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "Robson Thiago"'
