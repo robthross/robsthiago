@@ -74,7 +74,6 @@ pipeline {
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "Robson Thiago"'
           sh 'git checkout -b main'
-          sh 'git pull dev main'
           sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g nginx/nginx.yaml'
           sh 'git add .'
           sh 'git commit -m "Commit Pipeline"'
