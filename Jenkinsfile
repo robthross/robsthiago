@@ -73,12 +73,11 @@ pipeline {
           sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "Robson Thiago"'
-          
           sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g nginx/nginx.yaml'
-          sh 'git checkout main'
-          sh 'git merge dev'
           sh 'git add .'
           sh 'git commit -m "Commit Pipeline"'
+          sh 'git checkout main'
+          sh 'git merge dev'
           // withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
           //   sh('git tag -a "$BUILD_NUMBER" -m "Jenkins"')
           //   sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/robsthiago.git --tags')
