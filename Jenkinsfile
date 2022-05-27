@@ -70,7 +70,7 @@ pipeline {
     stage('Git Push') {
       steps {
         container('git') {
-          sh 'git clone https://github.com/robthross/jenkins.git'
+          // sh 'git clone https://github.com/robthross/jenkins.git'
           sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g nginx/nginx.yaml'
           sh 'cp -R nginx/nginx.yaml jenkins'
           sh 'cd jenkins'
