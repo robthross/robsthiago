@@ -70,12 +70,12 @@ pipeline {
     stage('Git Push') {
       steps {
         container('git') {
-          sh 'git checkout -b main'
-          sh 'git pull'
-          sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g nginx/nginx.yaml'
           sh 'git config --global --add safe.directory /home/jenkins/agent/workspace/gitlab-house'
           sh 'git config --global user.email "rtech.thiago@gmail.com"'
           sh 'git config --global user.name "Robson Thiago"'
+          sh 'git checkout -b main'
+          sh 'git pull'
+          sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g nginx/nginx.yaml'
           sh 'git add .'
           sh 'git commit -m "Commit Pipeline"'
           withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
