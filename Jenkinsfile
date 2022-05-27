@@ -77,8 +77,8 @@ pipeline {
           sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g nginx/nginx.yaml'
           sh 'git checkout main'
           sh 'git merge dev'
-          // sh 'git add .'
-          // sh 'git commit -m "Commit Pipeline"'
+          sh 'git add .'
+          sh 'git commit -m "Commit Pipeline"'
           // withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
           //   sh('git tag -a "$BUILD_NUMBER" -m "Jenkins"')
           //   sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/robthross/robsthiago.git --tags')
