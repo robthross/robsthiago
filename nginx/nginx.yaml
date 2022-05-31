@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nginx
-  name: nginx
+    app: python
+  name: python
 spec:
   replicas: 1
   selector:
@@ -24,6 +24,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  labels:
+    app: python
   name: python
   namespace: python-test
 spec:
