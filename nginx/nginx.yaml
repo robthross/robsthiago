@@ -15,7 +15,7 @@ spec:
         app: python
     spec:
       containers:
-      - image: rtprosa315/jenkins:xxx
+      - image: rtprosa315/jenkins:256
         name: python
         ports:
         - containerPort: 80
