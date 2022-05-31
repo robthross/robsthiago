@@ -63,7 +63,6 @@ pipeline {
         container('buildah') {
           sh 'buildah push rtprosa315/jenkins:$BUILD_NUMBER'
           sh 'buildah push rtprosa315/jenkins:latest'
-          sh 'ls -lha'
         }
       }
     }
@@ -76,7 +75,7 @@ pipeline {
           sh 'sed -i s/xxx/"${BUILD_NUMBER}"/g nginx/nginx.yaml'
           sh 'git add .'
           sh 'git commit -m "Commit Pipeline"'
-          // sh 'git checkout -b main'
+          sh 'git checkout -b main'
           // sh 'git fetch'
           // sh 'git rebase main'
           withCredentials([usernamePassword(credentialsId: 'githubtoken', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
