@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: app-ec-bff-gestao-estabelecimentos-green
+    meta.helm.sh/release-namespace: app-ec-prd
+  creationTimestamp: "2022-04-21T01:58:05Z"
+  labels:
+    app.kubernetes.io/instance: app-ec-bff-gestao-estabelecimentos-green
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: helm-k8s-java
+    helm.sh/chart: helm-k8s-java-3.0.1
+    vr.beneficios/centro-custo: experiencia_ec
+    vr.beneficios/produto: default
+    vr.beneficios/squad: operacao-ec
+  name: app-ec-bff-gestao-estabelecimentos-green
+  namespace: app-ec-prd
+  resourceVersion: "105640123"
+  uid: 06f967b7-a781-4c8a-92c4-1936883785fe
+spec:
+  clusterIP: 172.20.140.110
+  clusterIPs:
+  - 172.20.140.110
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: http
+  - name: https
+    port: 8443
+    protocol: TCP
+    targetPort: https
+  selector:
+    app.kubernetes.io/instance: app-ec-bff-gestao-estabelecimentos-green
+    app.kubernetes.io/name: helm-k8s-java
+    vr.beneficios/centro-custo: experiencia_ec
+    vr.beneficios/produto: default
+    vr.beneficios/squad: operacao-ec
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
