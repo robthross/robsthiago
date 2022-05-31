@@ -4,6 +4,8 @@ WORKDIR /opt/python
 
 COPY . /opt/python
 
-RUN chmod 755 api.py
+RUN pip install flask
 
-CMD ["python3", "api.py"]
+RUN chmod 755 api.py && export FLASK_APP=api
+
+CMD ["flask", "run"]
