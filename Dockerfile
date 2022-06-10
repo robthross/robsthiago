@@ -8,4 +8,4 @@ RUN pip install Flask
 
 RUN chmod 755 app.py
 
-CMD ["flask", "run"]
+CMD ["flask", "run", "--host=0.0.0.0"]

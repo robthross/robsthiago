@@ -1,17 +1,21 @@
 #!/usr/bin/python3
 
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
+@app.route("/index.html")
+def index():
+    return render_template("index.html")
 
-@app.route("/meuproduto")
+@app.route("/curso-html.html")
 def produto():
-    return "<p>Escola de Dente</p>"
+    return render_template("curso-html.html")
 
-@app.route("/api/v1/")
+@app.route("/curso-js.html")
 def cnpj():
-    return "<p>315.883.988-11</p>"
+    return render_template("curso-js.html")
+
+if __name__=="__main__":
+    app.run(debug=True)
