@@ -18,7 +18,7 @@ spec:
       - image: rtprosa315/jenkins:xxx
         name: python
         ports:
-        - containerPort: 5000
+        - containerPort: 3031
 
 ---
 apiVersion: v1
@@ -31,7 +31,7 @@ metadata:
 spec:
   ports:
   - name: http
-    port: 5000
+    port: 3031
     protocol: TCP
     targetPort: http
   - name: https
