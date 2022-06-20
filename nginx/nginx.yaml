@@ -32,7 +32,7 @@ spec:
   ports:
   - name: http
     port: 5000
-    protocol: HTTP
+    protocol: TCP
     targetPort: http
   - name: https
     port: 443
