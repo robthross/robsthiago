@@ -6,6 +6,10 @@ COPY . /opt/python
 
 RUN python -m pip install --upgrade pip && \
 apk add gcc && \
+apk add python3-dev && \
+apk add build-base && \
+apk add linux-headers && \
+apk add pcre-dev && \
 pip3 install Flask && \
 pip3 install prometheus-client && \
 pip3 install uwsgi
