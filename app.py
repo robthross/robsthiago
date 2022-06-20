@@ -22,8 +22,6 @@ def produto():
 def cnpj():
     return render_template("curso-js.html")
 
-
-
 # Decorate function with metric.
 @REQUEST_TIME.time()
 def process_request(t):
