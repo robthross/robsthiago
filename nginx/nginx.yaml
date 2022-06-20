@@ -18,7 +18,16 @@ spec:
       - image: rtprosa315/jenkins:xxx
         name: python
         ports:
-        - containerPort: 3031
+        - containerPort: 80
+      containers:
+      - image: nginx
+        name: python
+        ports:
+        - containerPort: 8080
+      volumes:
+      - name: configmap
+        configMap:
+          name: nginx-config
 
 ---
 apiVersion: v1
@@ -31,7 +40,7 @@ metadata:
 spec:
   ports:
   - name: http
-    port: 3031
+    port: 8080
     protocol: TCP
     targetPort: http
   - name: https
@@ -39,3 +48,20 @@ spec:
     protocol: TCP
     targetPort: https
   type: NodePort
+
+---
+apiVersion: v1
+data:
+  nginx.config: |-
+    server {
+        listen 80;
+
+        location / {
+            include uwsgi_params;
+            uwsgi_pass flask:8080;
+        }
+    }
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: python-test
