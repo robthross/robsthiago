@@ -4,7 +4,11 @@ WORKDIR /opt/python
 
 COPY . /opt/python
 
-RUN python -m pip install --upgrade pip && pip3 install Flask && pip3 install prometheus-client && pip3 install uwsgi
+RUN python -m pip install --upgrade pip && \
+apk add gcc && \
+pip3 install Flask && \
+pip3 install prometheus-client && \
+pip3 install uwsgi
 
 RUN chmod 755 app.py
 
