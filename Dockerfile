@@ -16,4 +16,4 @@ pip3 install uwsgi
 
 RUN chmod 755 app.py
 
-CMD ["uwsgi", "--socket 127.0.0.1:3031", "--wsgi-file app.py", "--callable app", "--processes 4, --threads 2", "--stats 127.0.0.1:9191" ]
+CMD ["uwsgi", "--socket 0.0.0.0:5000", "--protocol=http", "-w wsgi:app" ]
