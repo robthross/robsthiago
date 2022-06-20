@@ -4,7 +4,7 @@ WORKDIR /opt/python
 
 COPY . /opt/python
 
-RUN pip install Flask
+RUN pip install Flask && pip install prometheus-client
 
 RUN chmod 755 app.py
 
